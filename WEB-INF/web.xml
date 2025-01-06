@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>controller.fh</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>userServlet</servlet-name>
+  	<display-name>userServlet</display-name>
+  	<description></description>
+  	<servlet-class>controller.userServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
   	<url-pattern>/Home</url-pattern>
@@ -43,5 +49,9 @@
   <servlet-mapping>
   	<servlet-name>fh</servlet-name>
   	<url-pattern>/fh</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>userServlet</servlet-name>
+  	<url-pattern>/userServlet</url-pattern>
   </servlet-mapping>
 </web-app>
