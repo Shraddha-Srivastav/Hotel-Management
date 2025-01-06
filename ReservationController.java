@@ -1,16 +1,19 @@
 package controller;
 
 
-import jakarta.servlet.*;
+import java.io.IOException;
+
+import com.user.dao.UserDAO;
+import com.user.dao.UserDAO.ReservationDAO;
+import com.user.model.User;
 import com.user.model.User.Reservation;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import com.user.dao.ReservationDAO;
-import com.user.model.Reservation;
-import com.user.model.User;
-
-import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/reserve")
 public class ReservationController extends HttpServlet {
@@ -31,8 +34,9 @@ public class ReservationController extends HttpServlet {
             String checkOutDate = request.getParameter("checkOutDate");
             int userId = ((User) session.getAttribute("user")).getId();
 
-            Reservation reservation = new Reservation();
-            if (reservationDAO.addReservation(reservation)) {
+            UserDAO.ReservationDAO reservationDAO = new UserDAO.ReservationDAO();
+            Reservation reservation = null;
+			if (reservationDAO.addReservation(reservation)) {
                 response.sendRedirect("reservation-success.jsp");
             } else {
                 request.setAttribute("errorMessage", "Failed to reserve. Try again.");
